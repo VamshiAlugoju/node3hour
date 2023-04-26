@@ -31,10 +31,11 @@ exports.postItems = (req,res,next)=>{
 
 exports.putItems = (req,res,next)=>{
     let Id = req.params.id;
+    let val = parseInt(req.query.val)
     Item.findByPk(Id)
     .then(item=>{
         tosendItem = item;
-      let newQuantity = item.Quantity-1;
+      let newQuantity = item.Quantity-val;
       return Item.update({Quantity:newQuantity},{
         where:{
             id:Id
